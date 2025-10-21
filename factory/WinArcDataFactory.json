@@ -1,0 +1,9 @@
+{
+	"name": "WinArcDataFactory",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "245ac0c5-7208-4fd1-a7aa-e1e0909ffb8b",
+		"tenantId": "24b69280-77b3-43b4-b479-c83e7f4632cc"
+	}
+}
