@@ -1,0 +1,41 @@
+{
+	"name": "DSParquet",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LSAzureDataLakeStorage",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"s_container": {
+				"type": "string"
+			},
+			"s_folder": {
+				"type": "string"
+			},
+			"s_file": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().s_file",
+					"type": "Expression"
+				},
+				"folderPath": {
+					"value": "@dataset().s_folder",
+					"type": "Expression"
+				},
+				"fileSystem": {
+					"value": "@dataset().s_container",
+					"type": "Expression"
+				}
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	}
+}
