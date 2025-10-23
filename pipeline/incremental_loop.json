@@ -187,7 +187,10 @@
 														"value": "@item().table",
 														"type": "Expression"
 													},
-													"s_file": "@concat(pipeline().parameters.table,'_',variables('current'))"
+													"s_file": {
+														"value": "@concat(item().table,'_',variables('current'))",
+														"type": "Expression"
+													}
 												}
 											},
 											"enableLogging": false,
@@ -311,27 +314,39 @@
 									}
 								]
 							}
-						},
-						{
-							"name": "SetCurrent_copy1",
-							"type": "SetVariable",
-							"state": "Inactive",
-							"onInactiveMarkAs": "Succeeded",
-							"dependsOn": [],
-							"policy": {
-								"secureOutput": false,
-								"secureInput": false
-							},
-							"userProperties": [],
-							"typeProperties": {
-								"variableName": "current",
-								"value": {
-									"value": "@utcNow()",
-									"type": "Expression"
-								}
-							}
 						}
 					]
+				}
+			},
+			{
+				"name": "Alerts",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach",
+						"dependencyConditions": [
+							"Failed",
+							"Skipped",
+							"Succeeded",
+							"Completed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-14.northcentralus.logic.azure.com:443/workflows/a7990063914342bdb3f65695ea45149d/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=TWQGUhO-yPVfpVVEvVu_Df31buAKUZP1QkYTAl93tSk",
+					"body": {
+						"value": "{\n    \"pipeline_name\":  \"@{pipeline().Pipeline}\",\n    \"pipline_runid\": \"@{pipeline().RunId}\"\n}",
+						"type": "Expression"
+					}
 				}
 			}
 		],
