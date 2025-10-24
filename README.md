@@ -5,3 +5,4 @@ adf screenshot -
 
 dlt pipelines -
 <img width="1893" height="832" alt="image" src="https://github.com/user-attachments/assets/08a76d62-244f-47d5-9873-00ed570defec" />
+<img width="1901" height="858" alt="image" src="https://github.com/user-attachments/assets/f391221b-bdc0-41a2-bcd1-ac6d6426e9b1" />
